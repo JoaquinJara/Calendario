@@ -2,7 +2,7 @@
 #FUNCIONES
 
 #ALGORITMO DIA SEMANA: http://eseprimo.blogspot.cl/2005/04/de-la-semana-fue.html
-def deteminarDigitos(ano):
+def determinarDigitos(ano):
 	digitosAno = str(ano)
 	if len(digitosAno) == 4:
 		return digitosAno
@@ -31,7 +31,7 @@ def coefSiglo(ano):
 	return coefi
 
 def coefAno(ano):
-	digitosAno = deteminarDigitos(ano)
+	digitosAno = determinarDigitos(ano)
 	digitosAno = digitosAno[2] + digitosAno[3]
 	ultimoDigitos = int(digitosAno)
 	coef = ultimoDigitos / 4
@@ -39,7 +39,7 @@ def coefAno(ano):
 	return coef
 
 def coefBisiesto(mes , ano):
-	digitosAno = deteminarDigitos(ano)
+	digitosAno = determinarDigitos(ano)
 	digito1 = int(digitosAno[2])
 	digito2 = int(digitosAno[3])
 	coef = digito1 + digito2
@@ -92,7 +92,7 @@ def diaSemana(dia , mes, ano):
 	return dia
 
 def esBisiesto(ano):
-	digitosAno = deteminarDigitos(ano)
+	digitosAno = determinarDigitos(ano)
 	digito1 = int(digitosAno[2])
 	digito2 = int(digitosAno[3])
 	coef = digito1 + digito2
@@ -118,11 +118,10 @@ def determinarDezplazamiento(inicioMes):
 		return 6
 
 def rellenarPrincipio(calendario, mes, diaInicial):
-	j = 2
 	i = 0
 	desplazamiento = determinarDezplazamiento(diaInicial)
 	while i < desplazamiento:
-		calendario[2].append(" -")
+		calendario[1].append(" -")
 		i+=1
 	return calendario
 
@@ -142,14 +141,13 @@ def agregarDia(calendario, numeroDelDia, pos):
 		numeroAgregado = " "+str(numeroDelDia)
 	else:
 		numeroAgregado = str(numeroDelDia)
-	
 	calendario[pos].append(numeroAgregado)
 	return calendario
 
 def rellenarDias(calendario, mes, esBi):
 	diasDelMes = calcularDiasMes(mes, esBi)
 	numeroDia = 1
-	i = 2
+	i = 1
 	while numeroDia <= diasDelMes:
 		if len(calendario[i]) == 7:
 			i+=1
@@ -159,7 +157,7 @@ def rellenarDias(calendario, mes, esBi):
 
 def rellenarFinal(calendario):
 	i = 0
-	while i < 9:
+	while i < 7:
 		if len(calendario[i]) == 7:
 			i+=1
 		else:
@@ -172,16 +170,45 @@ def rellenarCalendario(diaInicial, mes, esBi, calendario):
 	calendario = rellenarFinal(calendario) 
 	return calendario
 
+def imprimirTituloMes(mes, ano):
+	anio = determinarDigitos(ano)
+	if mes == 1:
+		print "-----------ENERO---------",anio,"-----------"
+	if mes == 2:
+		print "-----------FEBRERO-------",anio,"-----------"
+	if mes == 3:
+		print "-----------MARZO---------",anio,"-----------"
+	if mes == 4:
+		print "-----------ABRIL---------",anio,"-----------"
+	if mes == 5:
+		print "-----------MAYO----------",anio,"-----------"
+	if mes == 6:
+		print "-----------JUNIO---------",anio,"-----------"
+	if mes == 7:
+		print "-----------JULIO---------",anio,"-----------"
+	if mes == 8:
+		print "-----------AGOSTO--------",anio,"-----------"
+	if mes == 9:
+		print "-----------SEPTIEMBRE----",anio,"-----------"
+	if mes == 10:
+		print "-----------OCTUBRE-------",anio,"-----------"
+	if mes == 11:
+		print "-----------NOVIEMBRE-----",anio,"-----------"
+	if mes == 12:
+		print "-----------DICIEMBRE-----",anio,"-----------"
+	return
+
 def visualizarMes(mes, ano):
-	calendario = [["--","--","--","--","--","--","--"],[' L',' M',' M',' J',' V',' S',' D'],[],[],[],[],[],[],		["--","--","--","--","--","--","--"]]
+	calendario = [[' L',' M',' M',' J',' V',' S',' D'],[],[],[],[],[],[]]
 	diaInicial = diaSemana(1, mes, ano)
 	esBi = esBisiesto(ano)
 	calendario = rellenarCalendario(diaInicial, mes, esBi, calendario)
 	i = 0
-	while i < 9:
+	imprimirTituloMes(mes, ano)
+	while i < 7:
 		print calendario[i]
 		i+=1
-	return calendario
+	return
 
 def ejecutarMenu():
         print "\n\nQue desea hacer: \n"
