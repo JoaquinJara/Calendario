@@ -252,16 +252,10 @@ def ejecutarOpcion(opcion):
                 
 
 #BLOQUE PRINCIPAL
-#ENTRADAS
-#dia = input("Ingrese dia: ")
+#ENTRADA
 print "\nBienvenid@ a 'nombre que le quieran poner a su programa' \n"
 opcion=ejecutarMenu()
-
-
 #PROCESO
-
 ejecutarOpcion(opcion)
-
 #SALIDA
 #aun no hay salidas
-#print "El dia de la semana es: " , diaSemana
