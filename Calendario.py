@@ -2,6 +2,11 @@
 #FUNCIONES
 
 #ALGORITMO DIA SEMANA: http://eseprimo.blogspot.cl/2005/04/de-la-semana-fue.html
+
+#1
+#
+#
+#
 def determinarDigitos(ano):
 	digitosAno = str(ano)
 	if len(digitosAno) == 4:
@@ -16,6 +21,10 @@ def determinarDigitos(ano):
 		digitosAno = "000" + digitosAno
 		return digitosAno
 
+#2
+#
+#
+#
 def coefSiglo(ano):
 	inicioSiglo = 0
 	finSiglo = 99
@@ -30,6 +39,10 @@ def coefSiglo(ano):
 	
 	return coefi
 
+#3
+#
+#
+#
 def coefAno(ano):
 	digitosAno = determinarDigitos(ano)
 	digitosAno = digitosAno[2] + digitosAno[3]
@@ -38,6 +51,10 @@ def coefAno(ano):
 	coef = coef + ultimoDigitos
 	return coef
 
+#4
+#
+#
+#
 def coefBisiesto(mes , ano):
 	digitosAno = determinarDigitos(ano)
 	digito1 = int(digitosAno[2])
@@ -48,6 +65,10 @@ def coefBisiesto(mes , ano):
 	else:
 		return 0
 
+#5
+#
+#
+#
 def coefMes(mes):
 	if mes == 1 or mes == 10:
 		return 6
@@ -64,6 +85,10 @@ def coefMes(mes):
 	if mes == 8:
 		return 1
 
+#6
+#
+#
+#
 def coefDeterminarDia(numero):
 	if numero == 1:
 		return "Lunes"
@@ -79,7 +104,11 @@ def coefDeterminarDia(numero):
 		return "Sabado"
 	if numero == 0:
 		return "Domingo"
-	
+
+#7
+#
+#
+#	
 def diaSemana(dia , mes, ano):
 	A = coefSiglo(ano)
 	B = coefAno(ano)
@@ -91,6 +120,10 @@ def diaSemana(dia , mes, ano):
 	dia = coefDeterminarDia(coef)
 	return dia
 
+#8
+#
+#
+#
 def esBisiesto(ano):
 	digitosAno = determinarDigitos(ano)
 	digito1 = int(digitosAno[2])
@@ -101,6 +134,10 @@ def esBisiesto(ano):
 	else: 
 		return False
 
+#9
+#
+#
+#
 def determinarDezplazamiento(inicioMes):
 	if inicioMes == "Lunes":
 		return 0
@@ -117,6 +154,10 @@ def determinarDezplazamiento(inicioMes):
 	if inicioMes == "Domingo":
 		return 6
 
+#10
+#
+#
+#
 def rellenarPrincipio(calendario, mes, diaInicial):
 	i = 0
 	desplazamiento = determinarDezplazamiento(diaInicial)
@@ -125,6 +166,10 @@ def rellenarPrincipio(calendario, mes, diaInicial):
 		i+=1
 	return calendario
 
+#11
+#
+#
+#
 def calcularDiasMes(mes, esBi):
 	if mes == 1 or mes == 3 or mes == 5 or mes == 7 or mes == 8 or mes == 10 or mes == 12:
 		return 31
@@ -136,6 +181,10 @@ def calcularDiasMes(mes, esBi):
 		else: 
 			return 28
 
+#12
+#
+#
+#
 def agregarDia(calendario, numeroDelDia, pos):
 	if numeroDelDia < 10:
 		numeroAgregado = " "+str(numeroDelDia)
@@ -144,6 +193,10 @@ def agregarDia(calendario, numeroDelDia, pos):
 	calendario[pos].append(numeroAgregado)
 	return calendario
 
+#13
+#
+#
+#
 def rellenarDias(calendario, mes, esBi):
 	diasDelMes = calcularDiasMes(mes, esBi)
 	numeroDia = 1
@@ -155,6 +208,10 @@ def rellenarDias(calendario, mes, esBi):
 		numeroDia +=1
 	return calendario
 
+#14
+#
+#
+#
 def rellenarFinal(calendario):
 	i = 0
 	while i < 7:
@@ -164,12 +221,20 @@ def rellenarFinal(calendario):
 			calendario[i].append(" -")
 	return calendario
 
+#15
+#
+#
+#
 def rellenarCalendario(diaInicial, mes, esBi, calendario):
 	calendario = rellenarPrincipio(calendario, mes, diaInicial)
 	calendario = rellenarDias(calendario, mes, esBi)
 	calendario = rellenarFinal(calendario) 
 	return calendario
 
+#16
+#
+#
+#
 def imprimirTituloMes(mes, ano):
 	anio = determinarDigitos(ano)
 	if mes == 1:
@@ -198,6 +263,10 @@ def imprimirTituloMes(mes, ano):
 		print "-----------DICIEMBRE-----",anio,"-----------"
 	return
 
+#17
+#
+#
+#
 def visualizarMes(mes, ano):
 	calendario = [[' L',' M',' M',' J',' V',' S',' D'],[],[],[],[],[],[]]
 	diaInicial = diaSemana(1, mes, ano)
@@ -210,6 +279,10 @@ def visualizarMes(mes, ano):
 		i+=1
 	return
 
+#18
+#
+#
+#
 def ejecutarMenu():
         print "\n\nQue desea hacer: \n"
         print "1) Mostrar dia de semana segun fecha"
@@ -220,6 +293,10 @@ def ejecutarMenu():
 
         return opcion
 
+#19
+#
+#
+#
 def ejecutarOpcion(opcion):
         if opcion == 1:
                 print "\nPor favor ingrese la fecha"
@@ -253,7 +330,7 @@ def ejecutarOpcion(opcion):
 
 #BLOQUE PRINCIPAL
 #ENTRADA
-print "\nBienvenid@ a 'nombre que le quieran poner a su programa' \n"
+print "\nBienvenid@ a Agenda USACH \n"
 opcion=ejecutarMenu()
 #PROCESO
 ejecutarOpcion(opcion)
