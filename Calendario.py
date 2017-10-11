@@ -297,7 +297,7 @@ def ejecutarMenu():
         print "2) Visualizar mes"
         print "3) Salir"
 
-        opcion= input("0pcion: ")
+        opcion= raw_input("0pcion: ")
 
         return opcion
 
@@ -306,32 +306,71 @@ def ejecutarMenu():
 #Entrada: Numero correspondiente a la opcion escogida por el usuario
 #Salida: (Hasta que se ejecute la opcion 3) se retornara nada
 def ejecutarOpcion(opcion):
-        if opcion == 1:
-                print "\nPor favor ingrese la fecha"
-                dia = input("Dia: ")
-                mes = input("Mes: ")
-                ano = input("Anio: ")
+        if opcion.isdigit():
+                opcion=int(opcion)
+                if opcion == 1:
+                        print "\nPor favor ingrese la fecha"
+                        dia = raw_input("Dia: ")
+                        if dia.isdigit():
+                                dia=int(dia)
+                        else:
+                                print "Por favor ingresar solo numeros"
+                                opcion=ejecutarMenu()
+                                ejecutarOpcion(opcion)
+                                
+                        mes = raw_input("Mes: ")
+                        if mes.isdigit():
+                                mes=int(mes)
+                        else:
+                                print "Por favor ingresar solo numeros"
+                                opcion=ejecutarMenu()
+                                ejecutarOpcion(opcion)
 
-                diaSem = diaSemana(dia, mes, ano)
-                print "El dia de la semana es: " , diaSem
-                opcion=ejecutarMenu()
-                ejecutarOpcion(opcion)
-                
-        elif opcion == 2:
-                print "\nPor favor ingrese el mes y el anio"
-                mes = input("Mes: ")
-                ano = input("Anio: ")
-                print "\n"
-                visualizarMes(mes, ano)
+                        ano = raw_input("Anio: ")
+                        if ano.isdigit():
+                                ano=int(ano)
+                        else:
+                                print "Por favor ingresar solo numeros"
+                                opcion=ejecutarMenu()
+                                ejecutarOpcion(opcion)
 
-                opcion=ejecutarMenu()
-                ejecutarOpcion(opcion)
+                        diaSem = diaSemana(dia, mes, ano)
+                        print "El dia de la semana es: " , diaSem
+                        opcion=ejecutarMenu()
+                        ejecutarOpcion(opcion)
+                        
+                elif opcion == 2:
+                        print "\nPor favor ingrese el mes y el anio"
+                        mes = raw_input("Mes: ")
+                        if mes.isdigit():
+                                mes=int(mes)
+                        else:
+                                print "Por favor ingresar solo numeros"
+                                opcion=ejecutarMenu()
+                                ejecutarOpcion(opcion)
 
-        elif opcion == 3:
-                return
+                        ano = raw_input("Anio: ")
+                        if ano.isdigit():
+                                ano=int(ano)
+                        else:
+                                print "Por favor ingresar solo numeros"
+                                opcion=ejecutarMenu()
+                                ejecutarOpcion(opcion)
 
+                        visualizarMes(mes, ano)
+
+                        opcion=ejecutarMenu()
+                        ejecutarOpcion(opcion)
+
+                elif opcion == 3:
+                        return
+
+                else:
+                        print "\n\n\n\nPor favor ingrese una opcion valida"
+                        opcion=ejecutarMenu()
+                        ejecutarOpcion(opcion)
         else:
-                print "\n\n\n\nPor favor ingrese una opcion valida"
+                print "Por favor ingresar solo numeros"
                 opcion=ejecutarMenu()
                 ejecutarOpcion(opcion)
                 
