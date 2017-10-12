@@ -4,7 +4,7 @@
 #ALGORITMO DIA SEMANA: http://eseprimo.blogspot.cl/2005/04/de-la-semana-fue.html
 
 #1
-#Funcion que transforma el año a string, agregando 0 a la izquierda de ser necesario para que tenga un largo de 4
+#Funcion que transforma el ano a string, agregando 0 a la izquierda de ser necesario para que tenga un largo de 4
 #Entrada: Numero correspondiente al anio
 #Salida: String del anio
 def determinarDigitos(ano):
@@ -292,88 +292,145 @@ def visualizarMes(mes, ano):
 #Entrada: ---
 #Retorna: Numero correspondiente a la opcion escogida
 def ejecutarMenu():
-        print "\n\nQue desea hacer: \n"
-        print "1) Mostrar dia de semana segun fecha"
-        print "2) Visualizar mes"
-        print "3) Salir"
+		print "\n\nQue desea hacer: \n"
+		print "1) Mostrar dia de semana segun fecha"
+		print "2) Visualizar mes"
+		print "3) Salir"
 
-        opcion= raw_input("0pcion: ")
+		opcion= raw_input("0pcion: ")
 
-        return opcion
+		return opcion
+
 
 #19
+
+
+def validarNumero(numero):
+	if numero.isdigit():
+		return True
+
+	else:
+		print "<<<<<<<<<<<<<<< Numero no valido >>>>>>>>>>>>>>>>>>"
+		return False
+
+
+def validarAno(numero): 
+	if validarNumero(numero):
+		numero= int(numero)
+		if numero >= 0:
+			return True 
+		else:
+			print "<<<<<<<<<<<<<< Anio invalido >>>>>>>>>>>>>>>>>"
+			return False
+	else:
+		return False
+
+
+
+def validarMes(numero):
+	if validarNumero(numero):
+		numero= int(numero)
+		if numero >= 1 and numero <= 12:
+			return True
+		else:
+			print "<<<<<<<<<<<<<< Mes invalido >>>>>>>>>>>>>>>>>"
+			return False
+	else:
+		return False
+
+
+
+def validarDia(numero,mes,ano):
+	if validarNumero(numero):
+		numero= int(numero)
+		dia = calcularDiasMes(mes,esBisiesto(ano))
+		if numero > 0 and numero <= dia:
+			return True
+		else:
+			print "<<<<<<<<<<<<<<< dia invalido para el mes correspondiente >>>>>>>>>>>>>>>>>"
+			return False
+
+	else:
+		return False
+
+
+
+
+
+
+
+
+#20
 #Funcion que recibe la opcion y ejecuta el caso necesario para dicha opcion
 #Entrada: Numero correspondiente a la opcion escogida por el usuario
 #Salida: (Hasta que se ejecute la opcion 3) se retornara nada
 def ejecutarOpcion(opcion):
-        if opcion.isdigit():
-                opcion=int(opcion)
-                if opcion == 1:
-                        print "\nPor favor ingrese la fecha"
-                        dia = raw_input("Dia: ")
-                        if dia.isdigit():
-                                dia=int(dia)
-                        else:
-                                print "Por favor ingresar solo numeros"
-                                opcion=ejecutarMenu()
-                                ejecutarOpcion(opcion)
-                                
-                        mes = raw_input("Mes: ")
-                        if mes.isdigit():
-                                mes=int(mes)
-                        else:
-                                print "Por favor ingresar solo numeros"
-                                opcion=ejecutarMenu()
-                                ejecutarOpcion(opcion)
+	if validarNumero(opcion):
+		opcion=int(opcion)
 
-                        ano = raw_input("Anio: ")
-                        if ano.isdigit():
-                                ano=int(ano)
-                        else:
-                                print "Por favor ingresar solo numeros"
-                                opcion=ejecutarMenu()
-                                ejecutarOpcion(opcion)
+		if opcion == 1:
+			print "\nPor favor ingrese la fecha"
 
-                        diaSem = diaSemana(dia, mes, ano)
-                        print "El dia de la semana es: " , diaSem
-                        opcion=ejecutarMenu()
-                        ejecutarOpcion(opcion)
-                        
-                elif opcion == 2:
-                        print "\nPor favor ingrese el mes y el anio"
-                        mes = raw_input("Mes: ")
-                        if mes.isdigit():
-                                mes=int(mes)
-                        else:
-                                print "Por favor ingresar solo numeros"
-                                opcion=ejecutarMenu()
-                                ejecutarOpcion(opcion)
+			ano = raw_input("Anio: ")
+			if not (validarAno(ano)):
+				ejecutarOpcion(str(opcion))
+			else:
+				ano=int(ano)
 
-                        ano = raw_input("Anio: ")
-                        if ano.isdigit():
-                                ano=int(ano)
-                        else:
-                                print "Por favor ingresar solo numeros"
-                                opcion=ejecutarMenu()
-                                ejecutarOpcion(opcion)
+			mes= raw_input("Mes: ")
+			if not (validarMes(mes)):
+				ejecutarOpcion(str(opcion))
+			else:
+				mes=int(mes)
 
-                        visualizarMes(mes, ano)
+			dia= raw_input("Dia: ")
+			if not (validarDia(dia,mes,ano)):
+				ejecutarOpcion(str(opcion))
+			else:
+				dia=int(dia)
 
-                        opcion=ejecutarMenu()
-                        ejecutarOpcion(opcion)
+			diaSem = diaSemana(dia, mes, ano)
+			print "El dia de la semana es: " , diaSem
+			
+			opcion=ejecutarMenu()
+			ejecutarOpcion(opcion)
+		
+		elif opcion == 2:
+			print "\nPor favor ingrese el mes y el anio"
+			
+			ano = raw_input("Anio: ")
+			if not (validarAno(ano)):
+				ejecutarOpcion(str(opcion))
+			else:
+				ano= int(ano)
 
-                elif opcion == 3:
-                        return
 
-                else:
-                        print "\n\n\n\nPor favor ingrese una opcion valida"
-                        opcion=ejecutarMenu()
-                        ejecutarOpcion(opcion)
-        else:
-                print "Por favor ingresar solo numeros"
-                opcion=ejecutarMenu()
-                ejecutarOpcion(opcion)
-                
+			mes = raw_input("Mes: ")
+			if not (validarMes(mes)):
+				ejecutarOpcion(str(opcion))
+			else:
+				mes= int(mes)
+
+
+			visualizarMes(mes, ano)
+
+			opcion=ejecutarMenu()
+			ejecutarOpcion(opcion)
+
+		elif opcion == 3:
+			return
+
+		else:
+			print "\n\n\n\nPor favor ingrese una opcion valida"
+			opcion=ejecutarMenu()
+			ejecutarOpcion(opcion)
+
+	else:
+		print "Por favor ingrese solo numeros"
+		opcion=ejecutarMenu()
+		ejecutarOpcion(opcion)
+
+				
 
 #BLOQUE PRINCIPAL
 #ENTRADA
