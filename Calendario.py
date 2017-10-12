@@ -4,7 +4,11 @@
 #ALGORITMO DIA SEMANA: http://eseprimo.blogspot.cl/2005/04/de-la-semana-fue.html
 
 #1
+<<<<<<< HEAD
 #Funcion que transforma el ano a string, agregando 0 a la izquierda de ser necesario para que tenga un largo de 4
+=======
+#Funcion que transforma el anio a string, agregando 0 a la izquierda de ser necesario para que tenga un largo de 4
+>>>>>>> c88398ecd0598aaba46b91401ac96c88d71fb48a
 #Entrada: Numero correspondiente al anio
 #Salida: String del anio
 def determinarDigitos(ano):
