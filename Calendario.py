@@ -294,7 +294,7 @@ def visualizarMes(mes, ano):
 #Entrada: ---
 #Retorna: Numero correspondiente a la opcion escogida
 def ejecutarMenu():
-		print "\n\nQue desea hacer: \n"
+		print "\nQue desea hacer: \n"
 		print "1) Mostrar dia de semana segun fecha"
 		print "2) Visualizar mes"
 		print "3) Salir"
@@ -324,7 +324,7 @@ def validarNumero(numero):
 def validarAno(numero): 
 	if validarNumero(numero):
 		numero= int(numero)
-		if numero >= 0:
+		if numero >= 0 and numero <=9999:
 			return True 
 		else:
 			print "<<<<<<<<<<<<<< Anio invalido >>>>>>>>>>>>>>>>>"
@@ -359,7 +359,7 @@ def validarDia(numero,mes,ano):
 		if numero > 0 and numero <= dia:
 			return True
 		else:
-			print "<<<<<<<<<<<<<<< dia invalido para el mes correspondiente >>>>>>>>>>>>>>>>>"
+			print "<<<<<<<<<<<<<<< Dia invalido para el mes ingresado >>>>>>>>>>>>>>>>>"
 			return False
 
 	else:
@@ -396,7 +396,7 @@ def ejecutarOpcion(opcion):
 				dia=int(dia)
 
 			diaSem = diaSemana(dia, mes, ano)
-			print "El dia de la semana es: " , diaSem
+			print "\n###### El dia de la semana es: " , diaSem," ######"
 			
 			opcion=ejecutarMenu()
 			ejecutarOpcion(opcion)
@@ -425,12 +425,11 @@ def ejecutarOpcion(opcion):
 			return
 
 		else:
-			print "\n\n\n\nPor favor ingrese una opcion valida"
+			print "\n\nPor favor ingrese una opcion valida"
 			opcion=ejecutarMenu()
 			ejecutarOpcion(opcion)
 
 	else:
-		print "Por favor ingrese solo numeros"
 		opcion=ejecutarMenu()
 		ejecutarOpcion(opcion)
 
@@ -438,7 +437,7 @@ def ejecutarOpcion(opcion):
 
 #BLOQUE PRINCIPAL
 #ENTRADA
-print "\nBienvenid@ a Agenda USACH \n"
+print "\nBienvenid@ a Agenda USACH"
 opcion=ejecutarMenu()
 #PROCESO
 ejecutarOpcion(opcion)
