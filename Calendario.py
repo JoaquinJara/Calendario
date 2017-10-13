@@ -305,8 +305,9 @@ def ejecutarMenu():
 
 
 #19
-
-
+#Funcion booleana que verifica si la entrada es un numero
+#Entrada: Un string que se desea saber si es un numero
+#Retorna: Si la entrada es un numero retorna True y de lo contrario False
 def validarNumero(numero):
 	if numero.isdigit():
 		return True
@@ -316,6 +317,10 @@ def validarNumero(numero):
 		return False
 
 
+#20
+#Funcion que verifica que el anio ingresado sea valido
+#Entrada: Un string que corresponde al anio
+#Retorna: True si el anio es valido y False de lo contrario
 def validarAno(numero): 
 	if validarNumero(numero):
 		numero= int(numero)
@@ -327,8 +332,10 @@ def validarAno(numero):
 	else:
 		return False
 
-
-
+#21
+#Funcion que verifica que el mes ingresado sea valido
+#Entrada: Un string que corresponde al numero del mes
+#Retorna: True si el mes es valido y False de lo contrario
 def validarMes(numero):
 	if validarNumero(numero):
 		numero= int(numero)
@@ -341,7 +348,10 @@ def validarMes(numero):
 		return False
 
 
-
+#22
+#Funcion que verifica que el dia ingresado sea valido en el mes y anio correspondiente
+#Entrada: Un string que corresponde al numero del dia, el numero del mes y el anio
+#Retorna: True si el dia es valido y False de lo contrario
 def validarDia(numero,mes,ano):
 	if validarNumero(numero):
 		numero= int(numero)
@@ -356,13 +366,7 @@ def validarDia(numero,mes,ano):
 		return False
 
 
-
-
-
-
-
-
-#20
+#23
 #Funcion que recibe la opcion y ejecuta el caso necesario para dicha opcion
 #Entrada: Numero correspondiente a la opcion escogida por el usuario
 #Salida: (Hasta que se ejecute la opcion 3) se retornara nada
@@ -405,14 +409,12 @@ def ejecutarOpcion(opcion):
 				ejecutarOpcion(str(opcion))
 			else:
 				ano= int(ano)
-
-
+				
 			mes = raw_input("Mes: ")
 			if not (validarMes(mes)):
 				ejecutarOpcion(str(opcion))
 			else:
 				mes= int(mes)
-
 
 			visualizarMes(mes, ano)
 
