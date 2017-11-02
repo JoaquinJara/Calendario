@@ -433,6 +433,67 @@ def ejecutarOpcion(opcion):
 		opcion=ejecutarMenu()
 		ejecutarOpcion(opcion)
 
+		
+#24
+#
+#
+#
+def obtenerFeriados():
+	archivo = open("feriadosChile.txt", "r")
+   	lineas = archivo.readlines()
+   	i = 0
+   	for dia in lineas:
+		lineas[i] = dia.split(':')
+		lineas[i][0] = lineas[i][0].split(' ')
+		lineas[i][1] = lineas[i][1].strip("\n")
+		i = i + 1
+   	archivo.close()
+   	return lineas
+
+#25
+#
+#
+#
+def esFeriado(dia, mes):
+	feriados = obtenerFeriados()
+	diaAux = str(dia)
+	mesAux = str(mes)
+	for feriado in feriados:
+		numMes = numeroMes(feriado[0][1])
+		if feriado[0][0] == diaAux and numMes == mesAux:
+			return True
+	return False
+#26
+#
+#
+#	
+def numeroMes(mes):
+	numero = mes.lower()
+	if numero == "enero":
+		return '1'
+	if numero == "febrero":
+		return '2'
+	if numero == "marzo":
+		return '3'
+	if numero == "abril":
+		return '4'
+	if numero == "mayo":
+		return '5'
+	if numero == "junio":
+		return '6'
+	if numero == "julio":
+		return '7'
+	if numero == "agosto":
+		return '8'
+	if numero == "septiembre":
+		return '9'
+	if numero == "octubre":
+		return '10'
+	if numero == "noviembre":
+		return '11'
+	if numero == "diciembre":
+		return '12'
+
 				
 
 #BLOQUE PRINCIPAL
