@@ -2,9 +2,9 @@
 #FUNCIONES
 
 #ALGORITMO DIA SEMANA: http://eseprimo.blogspot.cl/2005/04/de-la-semana-fue.html
+#FERIADO FIJOS DE CHILE: https://www.rankia.cl/foros/bancos-cl/temas/3395831-calendario-oficial-feriados-chile-2017
 
 #1
-
 #Funcion que transforma el ano a string, agregando 0 a la izquierda de ser necesario para que tenga un largo de 4
 #Funcion que transforma el anio a string, agregando 0 a la izquierda de ser necesario para que tenga un largo de 4
 #Entrada: Numero correspondiente al anio
@@ -162,7 +162,7 @@ def rellenarPrincipio(calendario, mes, diaInicial):
 	i = 0
 	desplazamiento = determinarDezplazamiento(diaInicial)
 	while i < desplazamiento:
-		calendario[1].append(" -")
+		calendario[1].append(" - ")
 		i+=1
 	return calendario
 
@@ -188,12 +188,18 @@ def calcularDiasMes(mes, esBi):
 #	  numeroDelDia: Numero correspondiente al dia que se desea agregar
 #	  pos: Numero que indica la posicion de la lista de la matriz que se desea agregar el dia
 #Salida: lista de lista correspondiente al calendario con el dia agregado en la posicion correspondiente
-def agregarDia(calendario, numeroDelDia, pos):
+def agregarDia(calendario, numeroDelDia, pos, mes):
 	if numeroDelDia < 10:
-		numeroAgregado = " "+str(numeroDelDia)
+		if esFeriado(numeroDelDia, mes):
+			agregarDia = " "+str(numeroDelDia)+"F"
+		else:
+			agregarDia = " "+str(numeroDelDia)+" "
 	else:
-		numeroAgregado = str(numeroDelDia)
-	calendario[pos].append(numeroAgregado)
+		if esFeriado(numeroDelDia, mes):
+			agregarDia = str(numeroDelDia)+"F"
+		else:
+			agregarDia = str(numeroDelDia)+" "
+	calendario[pos].append(agregarDia)
 	return calendario
 
 #13
@@ -209,7 +215,7 @@ def rellenarDias(calendario, mes, esBi):
 	while numeroDia <= diasDelMes:
 		if len(calendario[i]) == 7:
 			i+=1
-		calendario = agregarDia(calendario, numeroDia, i)
+		calendario = agregarDia(calendario, numeroDia, i, mes)
 		numeroDia +=1
 	return calendario
 
@@ -223,7 +229,7 @@ def rellenarFinal(calendario):
 		if len(calendario[i]) == 7:
 			i+=1
 		else:
-			calendario[i].append(" -")
+			calendario[i].append(" - ")
 	return calendario
 
 #15
@@ -247,29 +253,29 @@ def rellenarCalendario(diaInicial, mes, esBi, calendario):
 def imprimirTituloMes(mes, ano):
 	anio = determinarDigitos(ano)
 	if mes == 1:
-		print "-----------ENERO---------",anio,"-----------"
+		print "-------------ENERO------------",anio,"-------------"
 	if mes == 2:
-		print "-----------FEBRERO-------",anio,"-----------"
+		print "-------------FEBRERO----------",anio,"-------------"
 	if mes == 3:
-		print "-----------MARZO---------",anio,"-----------"
+		print "-------------MARZO------------",anio,"-------------"
 	if mes == 4:
-		print "-----------ABRIL---------",anio,"-----------"
+		print "-------------ABRIL------------",anio,"-------------"
 	if mes == 5:
-		print "-----------MAYO----------",anio,"-----------"
+		print "-------------MAYO-------------",anio,"-------------"
 	if mes == 6:
-		print "-----------JUNIO---------",anio,"-----------"
+		print "-------------JUNIO------------",anio,"-------------"
 	if mes == 7:
-		print "-----------JULIO---------",anio,"-----------"
+		print "-------------JULIO------------",anio,"-------------"
 	if mes == 8:
-		print "-----------AGOSTO--------",anio,"-----------"
+		print "-------------AGOSTO-----------",anio,"-------------"
 	if mes == 9:
-		print "-----------SEPTIEMBRE----",anio,"-----------"
+		print "-------------SEPTIEMBRE-------",anio,"-------------"
 	if mes == 10:
-		print "-----------OCTUBRE-------",anio,"-----------"
+		print "-------------OCTUBRE----------",anio,"-------------"
 	if mes == 11:
-		print "-----------NOVIEMBRE-----",anio,"-----------"
+		print "-------------NOVIEMBRE--------",anio,"-------------"
 	if mes == 12:
-		print "-----------DICIEMBRE-----",anio,"-----------"
+		print "-------------DICIEMBRE--------",anio,"-------------"
 	return
 
 #17
@@ -278,7 +284,7 @@ def imprimirTituloMes(mes, ano):
 #	  ano: Numero correspondiente al anio ingresado
 #Salida: ---
 def visualizarMes(mes, ano):
-	calendario = [[' L',' M',' M',' J',' V',' S',' D'],[],[],[],[],[],[]]
+	calendario = [[' L ',' M ',' M ',' J ',' V ',' S ',' D '],[],[],[],[],[],[]]
 	diaInicial = diaSemana(1, mes, ano)
 	esBi = esBisiesto(ano)
 	calendario = rellenarCalendario(diaInicial, mes, esBi, calendario)
@@ -364,7 +370,7 @@ def validarDia(numero,mes,ano):
 
 	else:
 		return False
-
+	
 
 #23
 #Funcion que recibe la opcion y ejecuta el caso necesario para dicha opcion
@@ -417,7 +423,8 @@ def ejecutarOpcion(opcion):
 				mes= int(mes)
 
 			visualizarMes(mes, ano)
-
+			#opcion = ejecutarMenu2()
+			#ejecutarOpcion2(opcion)
 			opcion=ejecutarMenu()
 			ejecutarOpcion(opcion)
 
@@ -494,8 +501,6 @@ def numeroMes(mes):
 	if numero == "diciembre":
 		return '12'
 
-				
-
 #BLOQUE PRINCIPAL
 #ENTRADA
 print "\nBienvenid@ a Agenda USACH"
@@ -504,4 +509,3 @@ opcion=ejecutarMenu()
 ejecutarOpcion(opcion)
 #SALIDA
 #aun no hay salidas
-
