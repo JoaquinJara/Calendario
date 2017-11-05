@@ -1,6 +1,8 @@
 #BLOQUE DE DEFINICIONES
 #FUNCIONES
 
+import os
+
 #ALGORITMO DIA SEMANA: http://eseprimo.blogspot.cl/2005/04/de-la-semana-fue.html
 #FERIADO FIJOS DE CHILE: https://www.rankia.cl/foros/bancos-cl/temas/3395831-calendario-oficial-feriados-chile-2017
 
@@ -38,7 +40,7 @@ def coefSiglo(ano):
 			coefi = coefi - 2
 		inicioSiglo = finSiglo + 1
 		finSiglo = inicioSiglo + 99
-	
+
 	return coefi
 
 #3
@@ -129,7 +131,7 @@ def diaSemana(dia , mes, ano):
 def esBisiesto(ano):
 	if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
 		return True
-	else: 
+	else:
 		return False
 
 #9
@@ -170,7 +172,7 @@ def rellenarPrincipio(calendario, mes, diaInicial):
 #Funcion que a partir del mes y si es bisiesto, determinar la cantidad de dias que este posee
 #Entrada: Mes: Numero correspondiente al mes ingresado
 #	  esBi: Booleano que indica que el mes es bisiesto o no
-#Salida: Numero que indica la cantidad de dias que posee el mes   
+#Salida: Numero que indica la cantidad de dias que posee el mes
 def calcularDiasMes(mes, esBi):
 	if mes == 1 or mes == 3 or mes == 5 or mes == 7 or mes == 8 or mes == 10 or mes == 12:
 		return 31
@@ -179,8 +181,40 @@ def calcularDiasMes(mes, esBi):
 	if mes == 2:
 		if esBi:
 			return 29
-		else: 
+		else:
 			return 28
+
+#24
+#
+#
+#
+def obtenerFeriados():
+        archivo = open("feriadosChile.txt","r")
+        lineas = archivo.readlines()
+        i=0
+        for dia in lineas:
+                lineas[i] = dia.split(':')
+                lineas[i][0] = lineas[i][0].split(' ')
+                lineas[i][1] = lineas[i][1].split('\n')
+                i = i + 1
+
+                
+        archivo.close()
+
+        return lineas      
+#25
+#
+#
+#
+def esFeriado(dia, mes):
+	feriados = obtenerFeriados()
+	diaAux = str(dia)
+	mesAux = str(mes)
+	for feriado in feriados:
+		numMes = numeroMes(feriado[0][2])
+		if feriado[0][1] == diaAux and numMes == mesAux:
+			return True
+	return False
 
 #12
 #Funcion que transforma el numero del dia a string y lo agrega a la matriz del calendario
@@ -242,7 +276,7 @@ def rellenarFinal(calendario):
 def rellenarCalendario(diaInicial, mes, esBi, calendario):
 	calendario = rellenarPrincipio(calendario, mes, diaInicial)
 	calendario = rellenarDias(calendario, mes, esBi)
-	calendario = rellenarFinal(calendario) 
+	calendario = rellenarFinal(calendario)
 	return calendario
 
 #16
@@ -303,7 +337,8 @@ def ejecutarMenu():
 		print "\nQue desea hacer: \n"
 		print "1) Mostrar dia de semana segun fecha"
 		print "2) Visualizar mes"
-		print "3) Salir"
+		print "3) Gestionar eventos"
+		print "4) Salir"
 
 		opcion= raw_input("0pcion: ")
 
@@ -327,11 +362,11 @@ def validarNumero(numero):
 #Funcion que verifica que el anio ingresado sea valido
 #Entrada: Un string que corresponde al anio
 #Retorna: True si el anio es valido y False de lo contrario
-def validarAno(numero): 
+def validarAno(numero):
 	if validarNumero(numero):
 		numero= int(numero)
 		if numero >= 0 and numero <=9999:
-			return True 
+			return True
 		else:
 			print "<<<<<<<<<<<<<< Anio invalido >>>>>>>>>>>>>>>>>"
 			return False
@@ -370,7 +405,187 @@ def validarDia(numero,mes,ano):
 
 	else:
 		return False
-	
+
+
+#26
+#
+#
+#
+def numeroMes(mes):
+	numero = mes.lower()
+	if numero == "enero":
+		return '1'
+	if numero == "febrero":
+		return '2'
+	if numero == "marzo":
+		return '3'
+	if numero == "abril":
+		return '4'
+	if numero == "mayo":
+		return '5'
+	if numero == "junio":
+		return '6'
+	if numero == "julio":
+		return '7'
+	if numero == "agosto":
+		return '8'
+	if numero == "septiembre":
+		return '9'
+	if numero == "octubre":
+		return '10'
+	if numero == "noviembre":
+		return '11'
+	if numero == "diciembre":
+		return '12'
+
+#27
+#
+#
+#
+
+def mesSegunNumero(numero):
+        if numero ==  1:
+                return "Enero"
+        if numero == 2:
+                return "Febrero"
+        if numero == 3:
+                return "Marzo"
+        if numero == 4:
+                return "Abril"
+        if numero == 5:
+                return "Mayo"
+        if numero == 6:
+                return "Junio"
+        if numero == 7:
+                return "Julio"
+        if numero == 8:
+                return "Agosto"
+        if numero == 9:
+                return "Septiembre"
+        if numero == 10:
+                return "Octubre"
+        if numero == 11:
+                return "Noviembre"
+        if numero == 12:
+                return "Diciembre"
+        
+
+
+#28
+#
+#
+#
+def eventoAnual():
+        print "Por favor ingrese dia y el mes de su evento anual"
+        archivo = open("feriadosChile.txt","a")
+        
+        dia= raw_input("Dia: ")
+        mes= input("Mes: ")
+        nombreEvento = raw_input("Nombre del evento: ")
+        
+        if (validarMes(str(mes))) and (validarDia(dia,mes,2016)):
+        
+                archivo.write("A" +" " + dia + " " +  mesSegunNumero(mes)+ ": " + nombreEvento + "\n")
+
+        archivo.close()
+        
+#29
+#
+#
+#
+def eventoMensual():
+        print "Por favor ingrese el dia de su evento mensual"
+        archivo = open("feriadosChile.txt","a")
+
+        dia= raw_input("Dia: ")
+        nombreEvento = raw_input("Nombre del evento: ")
+
+        # se establece el mes de diciembre ya que tiene 31 de dias y un año aleatorio
+        # para verificar que el día esté entre 0 y 31
+        if (validarDia(dia,12,2000)):
+                archivo.write("M"+ " " + dia + ": " + nombreEvento + "\n")
+
+        archivo.close
+         
+#30
+#
+#
+#
+def eventoPuntual():
+        print "Por favor ingrese la fecha de su evento puntual"
+        archivo = open("feriadosChile.txt","a")
+
+        dia= raw_input("Dia: ")
+        mes = input("Mes: ")
+        anio = input("Anio: ")
+        nombreEvento = raw_input("Nombre del evento: ")
+
+        if (validarMes(str(mes))) and (validarAno(str(anio))) and (validarDia(dia,mes,anio)):
+                archivo.write("P"+ " " + dia + " " + mesSegunNumero(mes) + " " + str(anio) + ": " + nombreEvento + "\n")
+        
+        
+        archivo.close()
+
+#31
+#
+#
+#
+def eventoSemanal():
+        print "Por favor ingrese el dia de semana de su evento semanal"
+        archivo = open("feriadosChile.txt","a")
+
+        dia= raw_input("Dia de semana(ej: Lunes): ")
+        nombreEvento = raw_input("Nombre del evento: ")
+
+        dia= dia.lower()
+
+        if dia == "lunes" or dia == "martes" or dia ==  "miercoles" or dia == "jueves" or dia == "viernes" or dia ==  "sabado" or dia == "domingo":
+                archivo.write("S"+ " " + dia +  ": " + nombreEvento + "\n")
+
+        archivo.close()
+
+#32
+#
+#
+#
+def menuAgenda():
+        print "\n Bienvenido a su agenda de eventos, qué desea hacer \n"
+        print "1) Agregar un evento puntual"
+        print "2) Agregar un evento semanal"
+        print "3) Agregar un evento mensual"
+        print "4) Agregar un evento anual"
+        print "5) Salir"
+        opcion= raw_input("0pcion: ")
+
+        if validarNumero(opcion):
+                opcion= int(opcion)
+                if opcion == 1 :
+                        eventoPuntual()
+                elif opcion == 2:
+                        eventoSemanal()
+                elif opcion == 3:
+                        eventoMensual()
+                elif opcion == 4:
+                        eventoAnual()
+                elif opcion == 5:
+                        return
+                else:
+                        print "\n\nPor favor ingrese una opcion valida\n"
+                        menuAgenda()
+        else:
+                menuAgenda()
+                        
+                
+
+
+
+
+
+
+
+
+
+        
 
 #23
 #Funcion que recibe la opcion y ejecuta el caso necesario para dicha opcion
@@ -403,19 +618,19 @@ def ejecutarOpcion(opcion):
 
 			diaSem = diaSemana(dia, mes, ano)
 			print "\n###### El dia de la semana es: " , diaSem," ######"
-			
+
 			opcion=ejecutarMenu()
 			ejecutarOpcion(opcion)
-		
+
 		elif opcion == 2:
 			print "\nPor favor ingrese el mes y el anio"
-			
+
 			ano = raw_input("Anio: ")
 			if not (validarAno(ano)):
 				ejecutarOpcion(str(opcion))
 			else:
 				ano= int(ano)
-				
+
 			mes = raw_input("Mes: ")
 			if not (validarMes(mes)):
 				ejecutarOpcion(str(opcion))
@@ -429,8 +644,11 @@ def ejecutarOpcion(opcion):
 			ejecutarOpcion(opcion)
 
 		elif opcion == 3:
-			return
+			menuAgenda()
+			print
 
+		elif opcion == 4:
+			return
 		else:
 			print "\n\nPor favor ingrese una opcion valida"
 			opcion=ejecutarMenu()
@@ -439,73 +657,23 @@ def ejecutarOpcion(opcion):
 	else:
 		opcion=ejecutarMenu()
 		ejecutarOpcion(opcion)
+        
 
-		
-#24
-#
-#
-#
-def obtenerFeriados():
-	archivo = open("feriadosChile.txt", "r")
-   	lineas = archivo.readlines()
-   	i = 0
-   	for dia in lineas:
-		lineas[i] = dia.split(':')
-		lineas[i][0] = lineas[i][0].split(' ')
-		lineas[i][1] = lineas[i][1].strip("\n")
-		i = i + 1
-   	archivo.close()
-   	return lineas
-
-#25
-#
-#
-#
-def esFeriado(dia, mes):
-	feriados = obtenerFeriados()
-	diaAux = str(dia)
-	mesAux = str(mes)
-	for feriado in feriados:
-		numMes = numeroMes(feriado[0][1])
-		if feriado[0][0] == diaAux and numMes == mesAux:
-			return True
-	return False
-#26
-#
-#
-#	
-def numeroMes(mes):
-	numero = mes.lower()
-	if numero == "enero":
-		return '1'
-	if numero == "febrero":
-		return '2'
-	if numero == "marzo":
-		return '3'
-	if numero == "abril":
-		return '4'
-	if numero == "mayo":
-		return '5'
-	if numero == "junio":
-		return '6'
-	if numero == "julio":
-		return '7'
-	if numero == "agosto":
-		return '8'
-	if numero == "septiembre":
-		return '9'
-	if numero == "octubre":
-		return '10'
-	if numero == "noviembre":
-		return '11'
-	if numero == "diciembre":
-		return '12'
+        
+        
 
 #BLOQUE PRINCIPAL
 #ENTRADA
 print "\nBienvenid@ a Agenda USACH"
 opcion=ejecutarMenu()
+
 #PROCESO
+
 ejecutarOpcion(opcion)
+
+
+
+
+
 #SALIDA
 #aun no hay salidas

@@ -1,16 +1,21 @@
-1 Enero: Anio Nuevo
-14 Abril: Viernes Santo (Semana Santa)
-15 Abril: Sabado Santo (Semana Santa)
-16 Abril: Domingo de Resurreccion (Semana Santa)
-1 Mayo: Dia del Trabajo
-21 Mayo: Dia de las Glorias Navales
-26 Junio: San Pedro y San Pablo
-16 Julio: Solemnidad de la Virgen del Carmen, Reina y Patrona de Chile
-15 Agosto: Asunción de la Virgen
-18 Septiembre: Fiestas Patrias
-19 Septiembre: Dia de las Glorias del Ejercito
-9 Octubre: Dia del Descubrimiento de Dos Mundos
-27 Octubre: Dia de las Iglesias Evangélicas y Protestantes
-1 Noviembre: Dia de Todos los Santos
-8 Diciembre: Dia de la Inmaculada Concepcion
-25 Diciembre: Navidad
+F 1 Enero: Anio Nuevo
+F 14 Abril: Viernes Santo (Semana Santa)
+F 15 Abril: Sabado Santo (Semana Santa)
+F 16 Abril: Domingo de Resurreccion (Semana Santa)
+F 1 Mayo: Dia del Trabajo
+F 21 Mayo: Dia de las Glorias Navales
+F 26 Junio: San Pedro y San Pablo
+F 16 Julio: Solemnidad de la Virgen del Carmen, Reina y Patrona de Chile
+F 15 Agosto: Asunción de la Virgen
+F 18 Septiembre: Fiestas Patrias
+F 19 Septiembre: Dia de las Glorias del Ejercito
+F 9 Octubre: Dia del Descubrimiento de Dos Mundos
+F 27 Octubre: Dia de las Iglesias Evangélicas y Protestantes
+F 1 Noviembre: Dia de Todos los Santos
+F 8 Diciembre: Dia de la Inmaculada Concepcion
+F 25 Diciembre: Navidad
+A 29 Febrero: Cumpleanio
+M 31: pagar cuenta
+P 20 Noviembre 2017: pep 2
+S sabado: Salir a trotar
+S lunes: ir a clases :v
