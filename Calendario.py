@@ -642,19 +642,110 @@ def ejecutarOpcion(opcion):
 	else:
 		opcion=ejecutarMenu()
 		ejecutarOpcion(opcion)
-        
 
+#33
+#
+#
+#
+def listaAString(lista , tipo):
+        if tipo== "A" or tipo == "F":
+                return lista[0][0] + " " + lista[0][1] + " " + lista[0][2] + ":" + lista[1] + "\n"
+        elif tipo == "M" or tipo == "S":
+                return lista[0][0] + " " + lista[0][1] +  ":" + lista[1] + "\n"
+        elif tipo == "P":
+                return lista[0][0] + " " + lista[0][1] + " " + lista[0][2] + " " + lista[0][3]+ ":" + lista[1] + "\n"
+  
+#34
+#
+#
+#
+def eliminarEvento(tipoEvento):
+        contador = 0
+        if  tipoEvento == "A":
+                mes = input("Ingrese el mes: ")
+                dia = raw_input("Ingrese el dia: ")
+                nombreEvento =raw_input("Ingrese el nombre del evento: ")
+
+                eventos = obtenerFeriados()
+                archivo = open("eventosAux.txt","w")
+
+                for evento in eventos:
+                        if not (evento[0][0] == 'A' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes) and evento[1].strip()==nombreEvento):
+                                archivo.write(listaAString(evento,evento[0][0]))
+                        else:
+                                contador=contador + 1
+                                
+        elif tipoEvento == "M":
+                dia = raw_input("Ingrese el dia: ")
+                nombreEvento =raw_input("Ingrese el nombre del evento: ")
+
+                eventos = obtenerFeriados()
+                archivo = open("eventosAux.txt","w")
+
+                for evento in eventos:
+                        if not (evento[0][0] == 'M' and evento[0][1]== dia  and evento[1].strip()==nombreEvento):
+                                archivo.write(listaAString(evento,evento[0][0]))
+                        else:
+                                contador=contador + 1
+
+        elif tipoEvento == "S":
+                dia = raw_input("Ingrese el dia de la semana: ")
+                nombreEvento =raw_input("Ingrese el nombre del evento: ")
+
+                eventos = obtenerFeriados()
+                archivo = open("eventosAux.txt","w")
+
+                for evento in eventos:
+                        if not (evento[0][0] == 'S' and evento[0][1].lower()== dia.lower()  and evento[1].strip()==nombreEvento):
+                                archivo.write(listaAString(evento,evento[0][0]))
+                        else:
+                                contador=contador +1 
+
+        elif tipoEvento == "P":
+                dia = raw_input("Ingrese el dia: ")
+                mes = input("Ingrese el mes: ")
+                anio= raw_input("Ingrese el anio: ")
+                nombreEvento =raw_input("Ingrese el nombre del evento: ")
+
+                eventos = obtenerFeriados()
+                archivo = open("eventosAux.txt","w")
+
+                for evento in eventos:
+                        if not (evento[0][0] == 'P' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes)
+                                and evento[0][3]==anio and evento[1].strip()==nombreEvento):
+                                archivo.write(listaAString(evento,evento[0][0]))
+                        else:
+                                contador=contador + 1                
+
+        archivo.close()
+        if contador == 0:
+                print "\n\nNo se encuentra el evento"
+
+                
+                
+                                
+                                
+
+                
+                
+                
+                
         
         
 
 #BLOQUE PRINCIPAL
 #ENTRADA
 print "\nBienvenid@ a Agenda USACH"
-opcion=ejecutarMenu()
+#opcion=ejecutarMenu()
 
 #PROCESO
 
-ejecutarOpcion(opcion)
+#ejecutarOpcion(opcion)
+
+print "\n************** Prueba eliminar eventos ************\n\n"
+
+tipo= raw_input("ingrese el tipo de evento a eliminar (A,M,S o P):")
+eliminarEvento(tipo)
 
 
 #SALIDA
