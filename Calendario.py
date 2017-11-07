@@ -379,15 +379,15 @@ def validarDia(numero,mes,ano):
 #
 def obtenerFeriados():
 	archivo = open("eventos.txt", "r")
-   	lineas = archivo.readlines()
-   	i = 0
-   	for dia in lineas:
+	lineas = archivo.readlines()
+	i = 0
+	for dia in lineas:
 		lineas[i] = dia.split(':')
 		lineas[i][0] = lineas[i][0].split(' ')
 		lineas[i][1] = lineas[i][1].strip("\n")
 		i = i + 1
-   	archivo.close()
-   	return lineas
+	archivo.close()
+	return lineas
 
 #25
 #
