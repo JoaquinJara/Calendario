@@ -184,38 +184,6 @@ def calcularDiasMes(mes, esBi):
 		else:
 			return 28
 
-#24
-#
-#
-#
-def obtenerFeriados():
-        archivo = open("feriadosChile.txt","r")
-        lineas = archivo.readlines()
-        i=0
-        for dia in lineas:
-                lineas[i] = dia.split(':')
-                lineas[i][0] = lineas[i][0].split(' ')
-                lineas[i][1] = lineas[i][1].split('\n')
-                i = i + 1
-
-                
-        archivo.close()
-
-        return lineas      
-#25
-#
-#
-#
-def esFeriado(dia, mes):
-	feriados = obtenerFeriados()
-	diaAux = str(dia)
-	mesAux = str(mes)
-	for feriado in feriados:
-		numMes = numeroMes(feriado[0][2])
-		if feriado[0][1] == diaAux and numMes == mesAux:
-			return True
-	return False
-
 #12
 #Funcion que transforma el numero del dia a string y lo agrega a la matriz del calendario
 #Entrada: calendario: lista de lista correspondiente a la matriz del calendario
@@ -405,7 +373,36 @@ def validarDia(numero,mes,ano):
 
 	else:
 		return False
+#24
+#
+#
+#
+def obtenerFeriados():
+	archivo = open("eventos.txt", "r")
+   	lineas = archivo.readlines()
+   	i = 0
+   	for dia in lineas:
+		lineas[i] = dia.split(':')
+		lineas[i][0] = lineas[i][0].split(' ')
+		lineas[i][1] = lineas[i][1].strip("\n")
+		i = i + 1
+   	archivo.close()
+   	return lineas
 
+#25
+#
+#
+#
+def esFeriado(dia, mes):
+	feriados = obtenerFeriados()
+	diaAux = str(dia)
+	mesAux = str(mes)
+	for feriado in feriados:
+		if feriado[0][0] == 'F':
+			numMes = numeroMes(feriado[0][2])
+			if feriado[0][1] == diaAux and numMes == mesAux:
+				return True
+	return False
 
 #26
 #
@@ -477,7 +474,7 @@ def mesSegunNumero(numero):
 #
 def eventoAnual():
         print "Por favor ingrese dia y el mes de su evento anual"
-        archivo = open("feriadosChile.txt","a")
+        archivo = open("eventos.txt","a")
         
         dia= raw_input("Dia: ")
         mes= input("Mes: ")
@@ -495,13 +492,13 @@ def eventoAnual():
 #
 def eventoMensual():
         print "Por favor ingrese el dia de su evento mensual"
-        archivo = open("feriadosChile.txt","a")
+        archivo = open("eventos.txt","a")
 
         dia= raw_input("Dia: ")
         nombreEvento = raw_input("Nombre del evento: ")
 
-        # se establece el mes de diciembre ya que tiene 31 de dias y un año aleatorio
-        # para verificar que el día esté entre 0 y 31
+        # se establece el mes de diciembre ya que tiene 31 de dias y un anio aleatorio
+        # para verificar que el diaa esta entre 0 y 31
         if (validarDia(dia,12,2000)):
                 archivo.write("M"+ " " + dia + ": " + nombreEvento + "\n")
 
@@ -513,7 +510,7 @@ def eventoMensual():
 #
 def eventoPuntual():
         print "Por favor ingrese la fecha de su evento puntual"
-        archivo = open("feriadosChile.txt","a")
+        archivo = open("eventos.txt","a")
 
         dia= raw_input("Dia: ")
         mes = input("Mes: ")
@@ -532,7 +529,7 @@ def eventoPuntual():
 #
 def eventoSemanal():
         print "Por favor ingrese el dia de semana de su evento semanal"
-        archivo = open("feriadosChile.txt","a")
+        archivo = open("eventos.txt","a")
 
         dia= raw_input("Dia de semana(ej: Lunes): ")
         nombreEvento = raw_input("Nombre del evento: ")
@@ -549,7 +546,7 @@ def eventoSemanal():
 #
 #
 def menuAgenda():
-        print "\n Bienvenido a su agenda de eventos, qué desea hacer \n"
+        print "\n Bienvenido a su agenda de eventos, que desea hacer \n"
         print "1) Agregar un evento puntual"
         print "2) Agregar un evento semanal"
         print "3) Agregar un evento mensual"
@@ -575,18 +572,6 @@ def menuAgenda():
         else:
                 menuAgenda()
                         
-                
-
-
-
-
-
-
-
-
-
-        
-
 #23
 #Funcion que recibe la opcion y ejecuta el caso necesario para dicha opcion
 #Entrada: Numero correspondiente a la opcion escogida por el usuario
@@ -670,9 +655,6 @@ opcion=ejecutarMenu()
 #PROCESO
 
 ejecutarOpcion(opcion)
-
-
-
 
 
 #SALIDA
