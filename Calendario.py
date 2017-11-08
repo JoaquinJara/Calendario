@@ -436,9 +436,9 @@ def numeroMes(mes):
 		return '12'
 
 #27
-#
-#
-#
+#Funcion que entrega el nombre de un mes segun el numero de este
+#Entrada: numero del mes
+#Retorno: nombre del mes
 
 def mesSegunNumero(numero):
         if numero ==  1:
@@ -469,9 +469,9 @@ def mesSegunNumero(numero):
 
 
 #28
-#
-#
-#
+# Funcion que escribe en el archivo un evento anual
+# Entrada: ---
+# Retorno: ---
 def eventoAnual():
         print "Por favor ingrese dia y el mes de su evento anual"
         archivo = open("eventos.txt","a")
@@ -485,11 +485,11 @@ def eventoAnual():
                 archivo.write("A" +" " + dia + " " +  mesSegunNumero(mes)+ ": " + nombreEvento + "\n")
 
         archivo.close()
-        
+        return
 #29
-#
-#
-#
+# Funcion que escribe en el archivo un evento mensual
+# Entrada: ---
+# Retorno: ---
 def eventoMensual():
         print "Por favor ingrese el dia de su evento mensual"
         archivo = open("eventos.txt","a")
@@ -503,11 +503,11 @@ def eventoMensual():
                 archivo.write("M"+ " " + dia + ": " + nombreEvento + "\n")
 
         archivo.close
+	return 
          
 #30
-#
-#
-#
+# Funcion que escribe en el archivo un evento puntual
+# Retorno: ---
 def eventoPuntual():
         print "Por favor ingrese la fecha de su evento puntual"
         archivo = open("eventos.txt","a")
@@ -522,11 +522,12 @@ def eventoPuntual():
         
         
         archivo.close()
+	return
 
 #31
-#
-#
-#
+# Funcion que escribe en el archivo un evento semanal
+# Entrada: ---
+# Retorno: ---
 def eventoSemanal():
         print "Por favor ingrese el dia de semana de su evento semanal"
         archivo = open("eventos.txt","a")
@@ -540,11 +541,12 @@ def eventoSemanal():
                 archivo.write("S"+ " " + dia +  ": " + nombreEvento + "\n")
 
         archivo.close()
+	return
 
 #32
-#
-#
-#
+# Funcion que muestra un menu de las opciones disponibles para gestionar eventos
+# Entrada: ---
+# Retorno: ---
 def menuAgenda():
         print "\n Bienvenido a su agenda de eventos, que desea hacer \n"
         print "1) Agregar un evento puntual"
@@ -656,9 +658,9 @@ def ejecutarOpcion(opcion):
 		ejecutarOpcion(opcion)
 
 #33
-#
-#
-#
+# Funcion que convierte una lista con los datos de un evento en un string segun el tipo de evento
+# Entrada: Lista con los datos del evento
+# Retorno: String correspondiente al formato del evento
 def listaAString(lista , tipo):
         if tipo== "A" or tipo == "F":
                 return lista[0][0] + " " + lista[0][1] + " " + lista[0][2] + ":" + lista[1] + "\n"
@@ -668,9 +670,9 @@ def listaAString(lista , tipo):
                 return lista[0][0] + " " + lista[0][1] + " " + lista[0][2] + " " + lista[0][3]+ ":" + lista[1] + "\n"
   
 #34
-#
-#
-#
+# Funcion que elimina un evento del archivo de eventos segun su tipo
+# Entrada: tipo de evento
+# Retorno: ---
 def eliminarEvento(tipoEvento):
         contador = 0
         if  tipoEvento == "A":
@@ -736,6 +738,8 @@ def eliminarEvento(tipoEvento):
         archivo.close()
         if contador == 0:
                 print "\n\nNo se encuentra el evento"
+
+	return
 
 
                                                 
