@@ -15,7 +15,7 @@ F 1 Noviembre: Dia de Todos los Santos
 F 8 Diciembre: Dia de la Inmaculada Concepcion
 F 25 Diciembre: Navidad
 A 29 Febrero: Cumpleanio
+M 31: pagar cuenta
 P 20 Noviembre 2017: pep 2
 S sabado: Salir a trotar
 S lunes: ir a clases 
-P 14 Mayo 1997: Cumpleanios Joaquin

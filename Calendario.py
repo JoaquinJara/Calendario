@@ -551,7 +551,11 @@ def menuAgenda():
         print "2) Agregar un evento semanal"
         print "3) Agregar un evento mensual"
         print "4) Agregar un evento anual"
-        print "5) Salir"
+	print "5) Eliminar un evento puntual"
+	print "6) Eliminar un evento semanal"
+	print "7) Eliminar un evento mensual"
+	print "8) Eliminar un evento anual"
+	print "9) Salir"
         opcion= raw_input("0pcion: ")
 
         if validarNumero(opcion):
@@ -565,6 +569,14 @@ def menuAgenda():
                 elif opcion == 4:
                         eventoAnual()
                 elif opcion == 5:
+			eliminarEvento("P")
+		elif opcion == 6:
+			eliminarEvento("S")
+		elif opcion == 7:
+			eliminarEvento("M")
+		elif opcion == 7:
+			eliminarEvento("A")
+                elif opcion == 9:
                         return
                 else:
                         print "\n\nPor favor ingrese una opcion valida\n"
@@ -662,6 +674,7 @@ def listaAString(lista , tipo):
 def eliminarEvento(tipoEvento):
         contador = 0
         if  tipoEvento == "A":
+		print "\nEliminar evento anual\n"
                 mes = input("Ingrese el mes: ")
                 dia = raw_input("Ingrese el dia: ")
                 nombreEvento =raw_input("Ingrese el nombre del evento: ")
@@ -676,6 +689,7 @@ def eliminarEvento(tipoEvento):
                                 contador=contador + 1
                                 
         elif tipoEvento == "M":
+		print "\nEliminar evento mensual\n"
                 dia = raw_input("Ingrese el dia: ")
                 nombreEvento =raw_input("Ingrese el nombre del evento: ")
 
@@ -689,6 +703,7 @@ def eliminarEvento(tipoEvento):
                                 contador=contador + 1
 
         elif tipoEvento == "S":
+		print "\nEliminar evento semanal\n"
                 dia = raw_input("Ingrese el dia de la semana: ")
                 nombreEvento =raw_input("Ingrese el nombre del evento: ")
 
@@ -702,6 +717,7 @@ def eliminarEvento(tipoEvento):
                                 contador=contador +1 
 
         elif tipoEvento == "P":
+		print "\nEliminar evento puntual\n"
                 dia = raw_input("Ingrese el dia: ")
                 mes = input("Ingrese el mes: ")
                 anio= raw_input("Ingrese el anio: ")
@@ -721,9 +737,8 @@ def eliminarEvento(tipoEvento):
         if contador == 0:
                 print "\n\nNo se encuentra el evento"
 
-                
-                
-                                
+
+                                                
                                 
 
                 
@@ -736,16 +751,16 @@ def eliminarEvento(tipoEvento):
 #BLOQUE PRINCIPAL
 #ENTRADA
 print "\nBienvenid@ a Agenda USACH"
-#opcion=ejecutarMenu()
+opcion=ejecutarMenu()
 
 #PROCESO
 
-#ejecutarOpcion(opcion)
+ejecutarOpcion(opcion)
 
-print "\n************** Prueba eliminar eventos ************\n\n"
+#print "\n************** Prueba eliminar eventos ************\n\n"
 
-tipo= raw_input("ingrese el tipo de evento a eliminar (A,M,S o P):")
-eliminarEvento(tipo)
+#tipo= raw_input("ingrese el tipo de evento a eliminar (A,M,S o P):")
+#eliminarEvento(tipo)
 
 
 #SALIDA
