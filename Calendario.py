@@ -373,11 +373,83 @@ def validarDia(numero,mes,ano):
 
 	else:
 		return False
+
+                        
+#23
+#Funcion que recibe la opcion y ejecuta el caso necesario para dicha opcion
+#Entrada: Numero correspondiente a la opcion escogida por el usuario
+#Salida: ---
+def ejecutarOpcion(opcion):
+	if validarNumero(opcion):
+		opcion=int(opcion)
+
+		if opcion == 1:
+			print "\nPor favor ingrese la fecha"
+
+			ano = raw_input("Anio: ")
+			if not (validarAno(ano)):
+				ejecutarOpcion(str(opcion))
+			else:
+				ano=int(ano)
+
+			mes= raw_input("Mes: ")
+			if not (validarMes(mes)):
+				ejecutarOpcion(str(opcion))
+			else:
+				mes=int(mes)
+
+			dia= raw_input("Dia: ")
+			if not (validarDia(dia,mes,ano)):
+				ejecutarOpcion(str(opcion))
+			else:
+				dia=int(dia)
+
+			diaSem = diaSemana(dia, mes, ano)
+			print "\n###### El dia de la semana es: " , diaSem," ######"
+
+			opcion=ejecutarMenu()
+			ejecutarOpcion(opcion)
+
+		elif opcion == 2:
+			print "\nPor favor ingrese el mes y el anio"
+
+			ano = raw_input("Anio: ")
+			if not (validarAno(ano)):
+				ejecutarOpcion(str(opcion))
+			else:
+				ano= int(ano)
+
+			mes = raw_input("Mes: ")
+			if not (validarMes(mes)):
+				ejecutarOpcion(str(opcion))
+			else:
+				mes= int(mes)
+
+			visualizarMes(mes, ano)
+			#opcion = ejecutarMenu2()
+			#ejecutarOpcion2(opcion)
+			opcion=ejecutarMenu()
+			ejecutarOpcion(opcion)
+
+		elif opcion == 3:
+			menuAgenda()
+
+		elif opcion == 4:
+			return
+		else:
+			print "\n\nPor favor ingrese una opcion valida"
+			opcion=ejecutarMenu()
+			ejecutarOpcion(opcion)
+
+	else:
+		opcion=ejecutarMenu()
+		ejecutarOpcion(opcion)
+
 #24
-#
-#
-#
-def obtenerFeriados():
+#Funcion que obtiene los eventos del archivo
+#Entrada: ---
+#Retorna: Devuelve todos los eventos del archivo en una lista de lista
+def obtenerEventos():
 	archivo = open("eventos.txt", "r")
 	lineas = archivo.readlines()
 	i = 0
@@ -390,11 +462,12 @@ def obtenerFeriados():
 	return lineas
 
 #25
-#
-#
-#
+#Funcion que verifica si un dia de un mes especifico, este es feriado
+#Entrada:-dia: Numero entero que indica el dia de la consulta
+#		 -mes: Numero entero que indica el mes de la consulta
+#Retorna: un booleano, True si la fecha ingresada es dia feriado, False si no lo es
 def esFeriado(dia, mes):
-	feriados = obtenerFeriados()
+	feriados = obtenerEventos()
 	diaAux = str(dia)
 	mesAux = str(mes)
 	for feriado in feriados:
@@ -405,9 +478,9 @@ def esFeriado(dia, mes):
 	return False
 
 #26
-#
-#
-#
+#Funcion que recibe el nombre de un mes y devuelve el numero representativo de este en un string
+#Entrada: Nombre del mes
+#Retorna: Numero en string que representa dicho mes ingresado
 def numeroMes(mes):
 	numero = mes.lower()
 	if numero == "enero":
@@ -436,10 +509,9 @@ def numeroMes(mes):
 		return '12'
 
 #27
-#Funcion que entrega el nombre de un mes segun el numero de este
-#Entrada: numero del mes
-#Retorno: nombre del mes
-
+#Funcion que entrega el nombre de un mes segun el numero representativo de este
+#Entrada: numero entero del mes
+#Retorna: nombre del mes en un string
 def mesSegunNumero(numero):
         if numero ==  1:
                 return "Enero"
@@ -466,8 +538,6 @@ def mesSegunNumero(numero):
         if numero == 12:
                 return "Diciembre"
         
-
-
 #28
 # Funcion que escribe en el archivo un evento anual
 # Entrada: ---
@@ -548,114 +618,40 @@ def eventoSemanal():
 # Entrada: ---
 # Retorno: ---
 def menuAgenda():
-        print "\n Bienvenido a su agenda de eventos, que desea hacer \n"
-        print "1) Agregar un evento puntual"
-        print "2) Agregar un evento semanal"
-        print "3) Agregar un evento mensual"
-        print "4) Agregar un evento anual"
-	print "5) Eliminar un evento puntual"
-	print "6) Eliminar un evento semanal"
-	print "7) Eliminar un evento mensual"
-	print "8) Eliminar un evento anual"
-	print "9) Salir"
-        opcion= raw_input("0pcion: ")
-
-        if validarNumero(opcion):
-                opcion= int(opcion)
-                if opcion == 1 :
-                        eventoPuntual()
-                elif opcion == 2:
-                        eventoSemanal()
-                elif opcion == 3:
-                        eventoMensual()
-                elif opcion == 4:
-                        eventoAnual()
-                elif opcion == 5:
-			eliminarEvento("P")
-		elif opcion == 6:
-			eliminarEvento("S")
-		elif opcion == 7:
-			eliminarEvento("M")
-		elif opcion == 7:
-			eliminarEvento("A")
-                elif opcion == 9:
-                        return
-                else:
-                        print "\n\nPor favor ingrese una opcion valida\n"
-                        menuAgenda()
-        else:
-                menuAgenda()
-                        
-#23
-#Funcion que recibe la opcion y ejecuta el caso necesario para dicha opcion
-#Entrada: Numero correspondiente a la opcion escogida por el usuario
-#Salida: (Hasta que se ejecute la opcion 3) se retornara nada
-def ejecutarOpcion(opcion):
-	if validarNumero(opcion):
-		opcion=int(opcion)
-
-		if opcion == 1:
-			print "\nPor favor ingrese la fecha"
-
-			ano = raw_input("Anio: ")
-			if not (validarAno(ano)):
-				ejecutarOpcion(str(opcion))
-			else:
-				ano=int(ano)
-
-			mes= raw_input("Mes: ")
-			if not (validarMes(mes)):
-				ejecutarOpcion(str(opcion))
-			else:
-				mes=int(mes)
-
-			dia= raw_input("Dia: ")
-			if not (validarDia(dia,mes,ano)):
-				ejecutarOpcion(str(opcion))
-			else:
-				dia=int(dia)
-
-			diaSem = diaSemana(dia, mes, ano)
-			print "\n###### El dia de la semana es: " , diaSem," ######"
-
-			opcion=ejecutarMenu()
-			ejecutarOpcion(opcion)
-
-		elif opcion == 2:
-			print "\nPor favor ingrese el mes y el anio"
-
-			ano = raw_input("Anio: ")
-			if not (validarAno(ano)):
-				ejecutarOpcion(str(opcion))
-			else:
-				ano= int(ano)
-
-			mes = raw_input("Mes: ")
-			if not (validarMes(mes)):
-				ejecutarOpcion(str(opcion))
-			else:
-				mes= int(mes)
-
-			visualizarMes(mes, ano)
-			#opcion = ejecutarMenu2()
-			#ejecutarOpcion2(opcion)
-			opcion=ejecutarMenu()
-			ejecutarOpcion(opcion)
-
-		elif opcion == 3:
-			menuAgenda()
-			print
-
-		elif opcion == 4:
-			return
-		else:
-			print "\n\nPor favor ingrese una opcion valida"
-			opcion=ejecutarMenu()
-			ejecutarOpcion(opcion)
-
+    print "\n Bienvenido a su agenda de eventos, que desea hacer \n"
+    print "1) Agregar un evento puntual"
+    print "2) Agregar un evento semanal"
+    print "3) Agregar un evento mensual"
+    print "4) Agregar un evento anual"
+    print "5) Eliminar un evento puntual"
+    print "6) Eliminar un evento semanal"
+    print "7) Eliminar un evento mensual"
+    print "8) Eliminar un evento anual"
+    print "9) Salir"
+    opcion= raw_input("0pcion: ")
+    if validarNumero(opcion):
+    	opcion= int(opcion)
+    if opcion == 1 :
+    	eventoPuntual()
+    elif opcion == 2:
+            eventoSemanal()
+    elif opcion == 3:
+            eventoMensual()
+    elif opcion == 4:
+            eventoAnual()
+    elif opcion == 5:
+    	eliminarEvento("P")
+    elif opcion == 6:
+    	eliminarEvento("S")
+    elif opcion == 7:
+		eliminarEvento("M")
+	elif opcion == 8:
+		eliminarEvento("A")
+	elif opcion == 9:
+		return
 	else:
-		opcion=ejecutarMenu()
-		ejecutarOpcion(opcion)
+		print "\n\n>>>>>>Por favor ingrese una opcion valida<<<<<<<"
+		return menuAgenda()
 
 #33
 # Funcion que convierte una lista con los datos de un evento en un string segun el tipo de evento
@@ -681,8 +677,8 @@ def eliminarEvento(tipoEvento):
                 dia = raw_input("Ingrese el dia: ")
                 nombreEvento =raw_input("Ingrese el nombre del evento: ")
 
-                eventos = obtenerFeriados()
-                archivo = open("eventosAux.txt","w")
+                eventos = obtenerEventos()
+                archivo = open("eventos.txt","w")
 
                 for evento in eventos:
                         if not (evento[0][0] == 'A' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes) and evento[1].strip()==nombreEvento):
@@ -695,8 +691,8 @@ def eliminarEvento(tipoEvento):
                 dia = raw_input("Ingrese el dia: ")
                 nombreEvento =raw_input("Ingrese el nombre del evento: ")
 
-                eventos = obtenerFeriados()
-                archivo = open("eventosAux.txt","w")
+                eventos = obtenerEventos()
+                archivo = open("eventos.txt","w")
 
                 for evento in eventos:
                         if not (evento[0][0] == 'M' and evento[0][1]== dia  and evento[1].strip()==nombreEvento):
@@ -709,8 +705,8 @@ def eliminarEvento(tipoEvento):
                 dia = raw_input("Ingrese el dia de la semana: ")
                 nombreEvento =raw_input("Ingrese el nombre del evento: ")
 
-                eventos = obtenerFeriados()
-                archivo = open("eventosAux.txt","w")
+                eventos = obtenerEventos()
+                archivo = open("eventos.txt","w")
 
                 for evento in eventos:
                         if not (evento[0][0] == 'S' and evento[0][1].lower()== dia.lower()  and evento[1].strip()==nombreEvento):
@@ -725,8 +721,8 @@ def eliminarEvento(tipoEvento):
                 anio= raw_input("Ingrese el anio: ")
                 nombreEvento =raw_input("Ingrese el nombre del evento: ")
 
-                eventos = obtenerFeriados()
-                archivo = open("eventosAux.txt","w")
+                eventos = obtenerEventos()
+                archivo = open("eventos.txt","w")
 
                 for evento in eventos:
                         if not (evento[0][0] == 'P' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes)
@@ -738,19 +734,8 @@ def eliminarEvento(tipoEvento):
         archivo.close()
         if contador == 0:
                 print "\n\nNo se encuentra el evento"
-
 	return
 
-
-                                                
-                                
-
-                
-                
-                
-                
-        
-        
 
 #BLOQUE PRINCIPAL
 #ENTRADA
@@ -760,12 +745,6 @@ opcion=ejecutarMenu()
 #PROCESO
 
 ejecutarOpcion(opcion)
-
-#print "\n************** Prueba eliminar eventos ************\n\n"
-
-#tipo= raw_input("ingrese el tipo de evento a eliminar (A,M,S o P):")
-#eliminarEvento(tipo)
-
 
 #SALIDA
 #aun no hay salidas
