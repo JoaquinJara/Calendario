@@ -1,8 +1,6 @@
 #BLOQUE DE DEFINICIONES
 #FUNCIONES
 
-import os
-
 #ALGORITMO DIA SEMANA: http://eseprimo.blogspot.cl/2005/04/de-la-semana-fue.html
 #FERIADO FIJOS DE CHILE: https://www.rankia.cl/foros/bancos-cl/temas/3395831-calendario-oficial-feriados-chile-2017
 
@@ -302,16 +300,15 @@ def visualizarMes(mes, ano):
 #Entrada: ---
 #Retorna: Numero correspondiente a la opcion escogida
 def ejecutarMenu():
-		print "\nQue desea hacer: \n"
-		print "1) Mostrar dia de semana segun fecha"
-		print "2) Visualizar mes"
-		print "3) Gestionar eventos"
-		print "4) Salir"
+	print "\nQue desea hacer: \n"
+	print "1) Mostrar dia de semana segun fecha"
+	print "2) Visualizar mes"
+	print "3) Gestionar eventos"
+	print "4) Salir"
 
-		opcion= raw_input("0pcion: ")
+	opcion= raw_input("0pcion: ")
 
-		return opcion
-
+	return opcion
 
 #19
 #Funcion booleana que verifica si la entrada es un numero
@@ -426,13 +423,11 @@ def ejecutarOpcion(opcion):
 				mes= int(mes)
 
 			visualizarMes(mes, ano)
-			#opcion = ejecutarMenu2()
-			#ejecutarOpcion2(opcion)
 			opcion=ejecutarMenu()
 			ejecutarOpcion(opcion)
 
 		elif opcion == 3:
-			menuAgenda()
+			menuEventos()
 
 		elif opcion == 4:
 			return
@@ -514,29 +509,29 @@ def numeroMes(mes):
 #Retorna: nombre del mes en un string
 def mesSegunNumero(numero):
         if numero ==  1:
-                return "Enero"
+            return "Enero"
         if numero == 2:
-                return "Febrero"
+            return "Febrero"
         if numero == 3:
-                return "Marzo"
+            return "Marzo"
         if numero == 4:
-                return "Abril"
+            return "Abril"
         if numero == 5:
-                return "Mayo"
+            return "Mayo"
         if numero == 6:
-                return "Junio"
+            return "Junio"
         if numero == 7:
-                return "Julio"
+            return "Julio"
         if numero == 8:
-                return "Agosto"
+            return "Agosto"
         if numero == 9:
-                return "Septiembre"
+            return "Septiembre"
         if numero == 10:
-                return "Octubre"
+            return "Octubre"
         if numero == 11:
-                return "Noviembre"
+            return "Noviembre"
         if numero == 12:
-                return "Diciembre"
+            return "Diciembre"
         
 #28
 # Funcion que escribe en el archivo un evento anual
@@ -590,7 +585,6 @@ def eventoPuntual():
         if (validarMes(str(mes))) and (validarAno(str(anio))) and (validarDia(dia,mes,anio)):
                 archivo.write("P"+ " " + dia + " " + mesSegunNumero(mes) + " " + str(anio) + ": " + nombreEvento + "\n")
         
-        
         archivo.close()
         return
 
@@ -611,12 +605,13 @@ def eventoSemanal():
                 archivo.write("S"+ " " + dia +  ": " + nombreEvento + "\n")
 
         archivo.close()
+        return
 
 #32
 # Funcion que muestra un menu de las opciones disponibles para gestionar eventos
 # Entrada: ---
 # Retorno: ---
-def menuAgenda():
+def menuEventos():
         print "\n Bienvenido a su agenda de eventos, que desea hacer \n"
         print "1) Agregar un evento puntual"
         print "2) Agregar un evento semanal"
@@ -626,31 +621,35 @@ def menuAgenda():
         print "6) Eliminar un evento semanal"
         print "7) Eliminar un evento mensual"
         print "8) Eliminar un evento anual"
-        print "9) Salir"
+        print "9) Volver al menu anterior"
+        print "10) Salir"
         opcion= raw_input("0pcion: ")
         if validarNumero(opcion):
-                opcion= int(opcion)
+            opcion= int(opcion)
         if opcion == 1 :
-                eventoPuntual()
+            eventoPuntual()
         elif opcion == 2:
-                eventoSemanal()
+            eventoSemanal()
         elif opcion == 3:
-                eventoMensual()
+            eventoMensual()
         elif opcion == 4:
             eventoAnual()
         elif opcion == 5:
-                eliminarEvento("P")
+            eliminarEvento("P")
         elif opcion == 6:
-                eliminarEvento("S")
+            eliminarEvento("S")
         elif opcion == 7:
-                eliminarEvento("M")
+            eliminarEvento("M")
         elif opcion == 8:
-                eliminarEvento("A")
+            eliminarEvento("A")
         elif opcion == 9:
-                return
+            opcionM = ejecutarMenu()
+            return ejecutarOpcion(opcionM)
+        elif opcion == 10:
+        	return
         else:
-                print "\n\n>>>>>>Por favor ingrese una opcion valida<<<<<<<"
-                return menuAgenda()
+            print "\n\n>>>>>>Por favor ingrese una opcion valida<<<<<<<"
+            return menuEventos()
 
 #33
 # Funcion que convierte una lista con los datos de un evento en un string segun el tipo de evento
@@ -680,10 +679,10 @@ def eliminarEvento(tipoEvento):
                 archivo = open("eventos.txt","w")
 
                 for evento in eventos:
-                        if not (evento[0][0] == 'A' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes) and evento[1].strip()==nombreEvento):
-                                archivo.write(listaAString(evento,evento[0][0]))
-                        else:
-                                contador=contador + 1
+                    if not (evento[0][0] == 'A' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes) and evento[1].strip()==nombreEvento):
+                            archivo.write(listaAString(evento,evento[0][0]))
+                    else:
+                            contador=contador + 1
                                 
         elif tipoEvento == "M":
                 print "\nEliminar evento mensual\n"
@@ -694,10 +693,10 @@ def eliminarEvento(tipoEvento):
                 archivo = open("eventos.txt","w")
 
                 for evento in eventos:
-                        if not (evento[0][0] == 'M' and evento[0][1]== dia  and evento[1].strip()==nombreEvento):
-                                archivo.write(listaAString(evento,evento[0][0]))
-                        else:
-                                contador=contador + 1
+                    if not (evento[0][0] == 'M' and evento[0][1]== dia  and evento[1].strip()==nombreEvento):
+                            archivo.write(listaAString(evento,evento[0][0]))
+                    else:
+                            contador=contador + 1
 
         elif tipoEvento == "S":
                 print "\nEliminar evento semanal\n"
@@ -708,10 +707,10 @@ def eliminarEvento(tipoEvento):
                 archivo = open("eventos.txt","w")
 
                 for evento in eventos:
-                        if not (evento[0][0] == 'S' and evento[0][1].lower()== dia.lower()  and evento[1].strip()==nombreEvento):
-                                archivo.write(listaAString(evento,evento[0][0]))
-                        else:
-                                contador=contador +1 
+                    if not (evento[0][0] == 'S' and evento[0][1].lower()== dia.lower()  and evento[1].strip()==nombreEvento):
+                            archivo.write(listaAString(evento,evento[0][0]))
+                    else:
+                            contador=contador +1 
 
         elif tipoEvento == "P":
                 print "\nEliminar evento puntual\n"
@@ -724,16 +723,18 @@ def eliminarEvento(tipoEvento):
                 archivo = open("eventos.txt","w")
 
                 for evento in eventos:
-                        if not (evento[0][0] == 'P' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes)
-                                and evento[0][3]==anio and evento[1].strip()==nombreEvento):
-                                archivo.write(listaAString(evento,evento[0][0]))
-                        else:
-                                contador=contador + 1                
+                    if not (evento[0][0] == 'P' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes)
+                            and evento[0][3]==anio and evento[1].strip()==nombreEvento):
+                            archivo.write(listaAString(evento,evento[0][0]))
+                    else:
+                            contador=contador + 1                
 
         archivo.close()
         if contador == 0:
                 print "\n\nNo se encuentra el evento"
-        return
+        else:
+        	print "\n\n###########Se elimino correctamente#########"
+        return menuEventos()
 
 
 #BLOQUE PRINCIPAL
@@ -742,7 +743,6 @@ print "\nBienvenid@ a Agenda USACH"
 opcion=ejecutarMenu()
 
 #PROCESO
-
 ejecutarOpcion(opcion)
 
 #SALIDA
