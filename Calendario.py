@@ -550,7 +550,7 @@ def eventoAnual():
                 archivo.write("A" +" " + dia + " " +  mesSegunNumero(mes)+ ": " + nombreEvento + "\n")
 
         archivo.close()
-        return
+        return menuEventos()
 #29
 # Funcion que escribe en el archivo un evento mensual
 # Entrada: ---
@@ -568,7 +568,7 @@ def eventoMensual():
                 archivo.write("M"+ " " + dia + ": " + nombreEvento + "\n")
 
         archivo.close()
-        return 
+        return menuEventos()
          
 #30
 # Funcion que escribe en el archivo un evento puntual
@@ -586,7 +586,7 @@ def eventoPuntual():
                 archivo.write("P"+ " " + dia + " " + mesSegunNumero(mes) + " " + str(anio) + ": " + nombreEvento + "\n")
         
         archivo.close()
-        return
+        return menuEventos()
 
 #31
 # Funcion que escribe en el archivo un evento semanal
@@ -605,7 +605,7 @@ def eventoSemanal():
                 archivo.write("S"+ " " + dia +  ": " + nombreEvento + "\n")
 
         archivo.close()
-        return
+        return menuEventos()
 
 #32
 # Funcion que muestra un menu de las opciones disponibles para gestionar eventos
@@ -733,7 +733,9 @@ def eliminarEvento(tipoEvento):
         if contador == 0:
                 print "\n\nNo se encuentra el evento"
         else:
-        	print "\n\n###########Se elimino correctamente#########"
+        	print "\n\n##############################################"
+        	print "########### Se elimino correctamente #########"
+        	print "##############################################\n\n"
         return menuEventos()
 
 
