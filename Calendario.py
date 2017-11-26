@@ -306,7 +306,7 @@ def ejecutarMenu():
 	print "3) Gestionar eventos"
 	print "4) Salir"
 
-	opcion= raw_input("0pcion: ")
+	opcion= raw_input("Ingrese numero de la 0pcion: ")
 
 	return opcion
 
@@ -383,21 +383,21 @@ def ejecutarOpcion(opcion):
 		if opcion == 1:
 			print "\nPor favor ingrese la fecha"
 
-			ano = raw_input("Anio: ")
+			ano = raw_input("Ingrese numero del Anio: ")
 			if not (validarAno(ano)):
-				ejecutarOpcion(str(opcion))
+				return ejecutarOpcion(str(opcion))
 			else:
 				ano=int(ano)
 
-			mes= raw_input("Mes: ")
+			mes= raw_input("Ingrese numero del Mes: ")
 			if not (validarMes(mes)):
-				ejecutarOpcion(str(opcion))
+				return ejecutarOpcion(str(opcion))
 			else:
 				mes=int(mes)
 
-			dia= raw_input("Dia: ")
+			dia= raw_input("Ingrese numero del Dia: ")
 			if not (validarDia(dia,mes,ano)):
-				ejecutarOpcion(str(opcion))
+				return ejecutarOpcion(str(opcion))
 			else:
 				dia=int(dia)
 
@@ -405,40 +405,40 @@ def ejecutarOpcion(opcion):
 			print "\n###### El dia de la semana es: " , diaSem," ######"
 
 			opcion=ejecutarMenu()
-			ejecutarOpcion(opcion)
+			return ejecutarOpcion(opcion)
 
 		elif opcion == 2:
 			print "\nPor favor ingrese el mes y el anio"
 
-			ano = raw_input("Anio: ")
+			ano = raw_input("Ingrese numero del Anio: ")
 			if not (validarAno(ano)):
-				ejecutarOpcion(str(opcion))
+				return ejecutarOpcion(str(opcion))
 			else:
 				ano= int(ano)
 
-			mes = raw_input("Mes: ")
+			mes = raw_input("Ingrese numero del Mes: ")
 			if not (validarMes(mes)):
-				ejecutarOpcion(str(opcion))
+				return ejecutarOpcion(str(opcion))
 			else:
 				mes= int(mes)
 
 			visualizarMes(mes, ano)
 			opcion=ejecutarMenu()
-			ejecutarOpcion(opcion)
+			return ejecutarOpcion(opcion)
 
 		elif opcion == 3:
-			menuEventos()
+			return menuEventos()
 
 		elif opcion == 4:
 			return
 		else:
 			print "\n\nPor favor ingrese una opcion valida"
 			opcion=ejecutarMenu()
-			ejecutarOpcion(opcion)
+			return ejecutarOpcion(opcion)
 
 	else:
 		opcion=ejecutarMenu()
-		ejecutarOpcion(opcion)
+		return ejecutarOpcion(opcion)
 
 #24
 #Funcion que obtiene los eventos del archivo
@@ -502,7 +502,7 @@ def numeroMes(mes):
 		return '11'
 	if numero == "diciembre":
 		return '12'
-
+	return
 #27
 #Funcion que entrega el nombre de un mes segun el numero representativo de este
 #Entrada: numero entero del mes
@@ -541,8 +541,8 @@ def eventoAnual():
         print "Por favor ingrese dia y el mes de su evento anual"
         archivo = open("eventos.txt","a")
         
-        dia= raw_input("Dia: ")
-        mes= input("Mes: ")
+        dia= raw_input("Ingrese numero del Dia: ")
+        mes= input("Ingrese numero del Mes: ")
         nombreEvento = raw_input("Nombre del evento: ")
         
         if (validarMes(str(mes))) and (validarDia(dia,mes,2016)):
@@ -559,7 +559,7 @@ def eventoMensual():
         print "Por favor ingrese el dia de su evento mensual"
         archivo = open("eventos.txt","a")
 
-        dia= raw_input("Dia: ")
+        dia= raw_input("Ingrese numero del Dia: ")
         nombreEvento = raw_input("Nombre del evento: ")
 
         # se establece el mes de diciembre ya que tiene 31 de dias y un anio aleatorio
@@ -577,9 +577,9 @@ def eventoPuntual():
         print "Por favor ingrese la fecha de su evento puntual"
         archivo = open("eventos.txt","a")
 
-        dia= raw_input("Dia: ")
-        mes = input("Mes: ")
-        anio = input("Anio: ")
+        dia= raw_input("Ingrese numero del Dia: ")
+        mes = input("Ingrese numero del Mes: ")
+        anio = input("Ingrese numero del Anio: ")
         nombreEvento = raw_input("Nombre del evento: ")
 
         if (validarMes(str(mes))) and (validarAno(str(anio))) and (validarDia(dia,mes,anio)):
@@ -612,17 +612,20 @@ def eventoSemanal():
 # Entrada: ---
 # Retorno: ---
 def menuEventos():
-        print "\n Bienvenido a su agenda de eventos, que desea hacer \n"
+        print "\n>>> Bienvenido a su gestionador de eventos, Que desea hacer <<<\n"
         print "1) Agregar un evento puntual"
         print "2) Agregar un evento semanal"
         print "3) Agregar un evento mensual"
         print "4) Agregar un evento anual"
-        print "5) Eliminar un evento puntual"
-        print "6) Eliminar un evento semanal"
-        print "7) Eliminar un evento mensual"
-        print "8) Eliminar un evento anual"
-        print "9) Volver al menu anterior"
-        print "10) Salir"
+        print "5) Visualizar feriados"
+        print "6) Visualizar eventos de un mes"
+        print "7) Visualizar eventos de un dia"
+        print "8) Eliminar un evento puntual"
+        print "9) Eliminar un evento semanal"
+        print "10) Eliminar un evento mensual"
+        print "11) Eliminar un evento anual"
+        print "12) Volver al menu anterior"
+        print "13) Salir"
         opcion= raw_input("0pcion: ")
         if validarNumero(opcion):
             opcion= int(opcion)
@@ -634,19 +637,25 @@ def menuEventos():
             eventoMensual()
         elif opcion == 4:
             eventoAnual()
-        elif opcion == 5:
-            eliminarEvento("P")
-        elif opcion == 6:
-            eliminarEvento("S")
-        elif opcion == 7:
-            eliminarEvento("M")
         elif opcion == 8:
-            eliminarEvento("A")
+            eliminarEvento("P")
         elif opcion == 9:
+            eliminarEvento("S")
+        elif opcion == 10:
+            eliminarEvento("M")
+        elif opcion == 11:
+            eliminarEvento("A")
+        elif opcion == 12:
             opcionM = ejecutarMenu()
             return ejecutarOpcion(opcionM)
-        elif opcion == 10:
+        elif opcion == 13:
         	return
+        elif opcion == 5:
+        	return visualizarFeriados()
+        elif opcion == 6:
+        	return visualizarEventoMes()
+        elif opcion == 7:
+        	return visualizarEventoDia()
         else:
             print "\n\n>>>>>>Por favor ingrese una opcion valida<<<<<<<"
             return menuEventos()
@@ -655,13 +664,14 @@ def menuEventos():
 # Funcion que convierte una lista con los datos de un evento en un string segun el tipo de evento
 # Entrada: Lista con los datos del evento
 # Retorno: String correspondiente al formato del evento
-def listaAString(lista , tipo):
+def listaAString(lista):
+	tipo = lista[0][0]
         if tipo== "A" or tipo == "F":
-                return lista[0][0] + " " + lista[0][1] + " " + lista[0][2] + ":" + lista[1] + "\n"
+                return " " + lista[0][1] + " " + lista[0][2] + ":" + lista[1] + "\n"
         elif tipo == "M" or tipo == "S":
-                return lista[0][0] + " " + lista[0][1] +  ":" + lista[1] + "\n"
+                return " " + lista[0][1] +  ":" + lista[1] + "\n"
         elif tipo == "P":
-                return lista[0][0] + " " + lista[0][1] + " " + lista[0][2] + " " + lista[0][3]+ ":" + lista[1] + "\n"
+                return " " + lista[0][1] + " " + lista[0][2] + " " + lista[0][3]+ ":" + lista[1] + "\n"
   
 #34
 # Funcion que elimina un evento del archivo de eventos segun su tipo
@@ -680,7 +690,7 @@ def eliminarEvento(tipoEvento):
 
                 for evento in eventos:
                     if not (evento[0][0] == 'A' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes) and evento[1].strip()==nombreEvento):
-                            archivo.write(listaAString(evento,evento[0][0]))
+                            archivo.write(evento[0][0]+listaAString(evento))
                     else:
                             contador=contador + 1
                                 
@@ -694,7 +704,7 @@ def eliminarEvento(tipoEvento):
 
                 for evento in eventos:
                     if not (evento[0][0] == 'M' and evento[0][1]== dia  and evento[1].strip()==nombreEvento):
-                            archivo.write(listaAString(evento,evento[0][0]))
+                            archivo.write(evento[0][0]+listaAString(evento))
                     else:
                             contador=contador + 1
 
@@ -708,7 +718,7 @@ def eliminarEvento(tipoEvento):
 
                 for evento in eventos:
                     if not (evento[0][0] == 'S' and evento[0][1].lower()== dia.lower()  and evento[1].strip()==nombreEvento):
-                            archivo.write(listaAString(evento,evento[0][0]))
+                            archivo.write(evento[0][0]+listaAString(evento))
                     else:
                             contador=contador +1 
 
@@ -725,18 +735,77 @@ def eliminarEvento(tipoEvento):
                 for evento in eventos:
                     if not (evento[0][0] == 'P' and evento[0][1]== dia and evento[0][2]==mesSegunNumero(mes)
                             and evento[0][3]==anio and evento[1].strip()==nombreEvento):
-                            archivo.write(listaAString(evento,evento[0][0]))
+                            archivo.write(evento[0][0]+listaAString(evento))
                     else:
                             contador=contador + 1                
 
         archivo.close()
         if contador == 0:
-                print "\n\nNo se encuentra el evento"
+                print "\n\nNo se encuentro el evento"
         else:
-        	print "\n\n##############################################"
+        	print "\n##############################################"
         	print "########### Se elimino correctamente #########"
-        	print "##############################################\n\n"
+        	print "##############################################\n"
         return menuEventos()
+#
+#
+#
+def visualizarFeriados():
+	archivo = open("eventos.txt","r")
+	eventitos = obtenerEventos()
+	print "\n######################## Feriados fijos de Chile ########################"
+	for evento in eventitos:
+		if(evento[0][0] == 'F'):
+			print "	",listaAString(evento).strip()
+	print "#########################################################################"
+	return menuEventos()
+
+#
+#
+#
+def visualizarEventoMes():
+	anio = raw_input("Ingrese numero del anio: ")
+	mes = raw_input("Ingrese numero del mes: ")
+	archivo = open("eventos.txt","r")
+	eventitos = obtenerEventos()
+	print "\n############# Eventos Mes:", mesSegunNumero(int(mes)), "#### Anio:", anio,"##############"
+	x = 0
+	for evento in eventitos:
+		if (evento[0][0]== 'F' or evento[0][0] == 'A') and evento[0][2]==mesSegunNumero(mes):
+			print "	-",listaAString(evento).strip()
+			x+=1
+		elif evento[0][0] == 'P' and evento[0][2] == mesSegunNumero(int(mes)) and evento[0][3] == anio:
+			print "	-",listaAString(evento).strip()
+			x+=1
+	if x == 0:
+		print "\n	NO se han encontrado eventos en el Mes seleccionado\n"
+	print "#################################################################"
+	return menuEventos()
+
+#
+#
+#
+def visualizarEventoDia():
+	anio = raw_input("Ingrese numero del anio: ")
+	mes = raw_input("Ingrese numero del mes: ")
+	dia = raw_input("Ingrese numero del dia: ")
+	archivo = open("eventos.txt","r")
+	eventitos = obtenerEventos()
+	print "\n############# Eventos Dia:", dia, "### Mes:", mesSegunNumero(int(mes)), "### Anio:", anio,"##############\n"
+	x = 0
+	for evento in eventitos:
+		if (evento[0][0]== 'F' or evento[0][0] == 'A') and evento[0][2]==mesSegunNumero(mes) and evento[0][1] == int(dia):
+			print "		-",listaAString(evento).strip()
+			x+=1
+		elif evento[0][0] == 'P' and evento[0][2] == mesSegunNumero(int(mes)) and evento[0][3] == anio and int(evento[0][1]) == int(dia):
+			print "		-",listaAString(evento).strip()
+			x+=1
+	if x == 0:
+		print "	NO se han encontrado eventos en el Dia seleccionado"
+	print "\n############################################################################"
+
+	return menuEventos()
+
 
 
 #BLOQUE PRINCIPAL
