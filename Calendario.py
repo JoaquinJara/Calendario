@@ -666,12 +666,12 @@ def menuEventos():
 # Retorno: String correspondiente al formato del evento
 def listaAString(lista):
 	tipo = lista[0][0]
-        if tipo== "A" or tipo == "F":
-                return " " + lista[0][1] + " " + lista[0][2] + ":" + lista[1] + "\n"
-        elif tipo == "M" or tipo == "S":
-                return " " + lista[0][1] +  ":" + lista[1] + "\n"
-        elif tipo == "P":
-                return " " + lista[0][1] + " " + lista[0][2] + " " + lista[0][3]+ ":" + lista[1] + "\n"
+	if tipo== "A" or tipo == "F":
+		return " " + lista[0][1] + " " + lista[0][2] + ":" + lista[1] + "\n"
+	elif tipo == "M" or tipo == "S":
+		return " " + lista[0][1] +  ":" + lista[1] + "\n"
+	elif tipo == "P":
+		return " " + lista[0][1] + " " + lista[0][2] + " " + lista[0][3]+ ":" + lista[1] + "\n"
   
 #34
 # Funcion que elimina un evento del archivo de eventos segun su tipo
